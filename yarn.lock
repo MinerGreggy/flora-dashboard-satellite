@@ -398,6 +398,14 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
+flora-api@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/flora-api/-/flora-api-2.2.2.tgz#ec5774aa7594609fe38085f31ca5e32b2ba6a930"
+  integrity sha512-kNsHPGKyJMiZpEiB7nSeC5qOfBghJVRoIiBCx2y+Q+msI2USe2oEjX9vn1hMC1m1xWwnG/My91Co4axSvETb0w==
+  dependencies:
+    json-bigint "^1.0.0"
+    ws "^7.5.0"
+
 follow-redirects@^1.10.0:
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
@@ -512,14 +520,6 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
-
-flora-api@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/flora-api/-/flora-api-2.2.1.tgz#a432d5353dee32bf9ec10f6f64eec196ce342c44"
-  integrity sha512-yPAI6Ig3vwagjsc7SSpEKpRftKfPtDBY+oEjguWtgEZWeNr/dan7snrAYJ7L7Fvo1d7ru9ao5wJAktt4VESoHw==
-  dependencies:
-    json-bigint "^1.0.0"
-    ws "^7.5.0"
 
 https-proxy-agent@^5.0.0:
   version "5.0.0"
