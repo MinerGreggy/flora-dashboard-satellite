@@ -31,7 +31,7 @@ jobs:
       - run: npm publish --access public
       - uses: JS-DevTools/npm-publish@v1
         with:
-          registry: 'https://libraries.io'
+          registry: https://libraries.io
           token: ${{ secrets.LIBIO }}
           check-version: true
 
