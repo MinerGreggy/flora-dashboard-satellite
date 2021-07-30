@@ -33,4 +33,5 @@ jobs:
         with:
           registry: 'https://libraries.io'
           token: ${{ secrets.LIBIO }}
+          check-version: true
 
