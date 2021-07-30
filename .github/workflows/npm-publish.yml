@@ -1,21 +1,28 @@
 name: npm-publish
-
 on:
   push:
     branches:
-      - main
-
+      - main # Change this to your default branch
 jobs:
-  publish:
+  npm-publish:
+    name: npm-publish
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-          registry-url: 'https://libraries.io'
-      - run: npm publish --access public
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.LIBIO }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Publish if version has been updated
+      uses: pascalgn/npm-publish-action@1.3.8
+      with: # All of theses inputs are optional
+        node-version: 12.x
+        registry-url: 'https://libraries.io'
+        tag_name: "v%s"
+        tag_message: "v%s"
+        create_tag: "true"
+        commit_pattern: "^Release (\\S+)"
+        workspace: "."
+        publish_command: "npm publish --access public"
+        publish_args: "--non-interactive"
+      env: # More info about the environment variables in the README
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+        NPM_AUTH_TOKEN: ${{ secrets.LIBIO }} # You need to set this in your repo settings
 
