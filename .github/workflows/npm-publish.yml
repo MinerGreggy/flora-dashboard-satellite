@@ -30,7 +30,7 @@ jobs:
           name: release-archive-${{ matrix.os }}
           path: build/*.zip
 
-  publish-release:
+    publish-release:
     name: Publish release
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
