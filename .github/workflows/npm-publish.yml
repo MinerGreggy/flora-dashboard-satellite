@@ -1,9 +1,8 @@
-on:
-  push:
-    branches:
-      - main # Change this to your default branch
+on: push
+name: CI
+
 jobs:
-    build:
+  build:
     name: Build
     strategy:
       fail-fast: false
@@ -29,7 +28,7 @@ jobs:
           name: release-archive-${{ matrix.os }}
           path: build/*.zip
 
-    publish-release:
+  publish-release:
     name: Publish release
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
