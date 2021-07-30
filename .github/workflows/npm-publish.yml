@@ -33,5 +33,5 @@ jobs:
       - run: npm publish --access public
       - uses: JS-DevTools/npm-publish@v1
         with:
-          registry: 'https://libraries.io'
-          token: ${{ secrets.LIBIO }}
+          registry: 'https://registry.npmjs.org'
+          token: ${{ secrets.NPM_TOKEN }}
