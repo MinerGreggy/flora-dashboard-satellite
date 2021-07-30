@@ -26,6 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/can-npm-publish-action@v1
-        with: 
+        env:
           GITHUB_TOKEN:  ${{ secrets.NPM_TOKEN }}
 
