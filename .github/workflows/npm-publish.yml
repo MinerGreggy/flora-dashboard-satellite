@@ -27,13 +27,12 @@ jobs:
     name: publish-to-npm
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@master
-    - name: Set up Node.js
-      uses: actions/setup-node@master
-      with:
-        node-version: 12.0.0
-    - name: Publish version
-      uses: geoblink/publish-to-npm@v1.0.2
+      - uses: actions/setup-node@master
+        with:
+        version: 12
+        registry-url: 'https://registry.npmjs.org'
+      - uses: shawnbot/npm-publish-action@master
       env:
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # You must set this in your repo settings
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           # NOTE: use the NODE_ prefix instead of NPM_ here!
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
