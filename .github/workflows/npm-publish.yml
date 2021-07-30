@@ -23,21 +23,17 @@ jobs:
           release_name: Release ${{ steps.is-published.outputs.version }}
           draft: false
           prerelease: false
-  publish-to-npm:
-    name: publish-to-npm
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - uses: flood-io/is-published-on-npm@v1
-        id: is-published
-      - name: Release
-        if: ${{ steps.is-published.outputs.published == 'false' }}
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12.x
-          registry-url: 'https://registry.npmjs.org'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+        name: publish-to-npm
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout the repo
+          uses: actions/checkout@v2
+          - name: Set up Node.js 12.x
+          uses: actions/setup-node@v2
+           with:
+             node-version: 12.x
+             registry-url: 'https://registry.npmjs.org'
+          - name: Publish to npm
+            env:
+               NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: npm publish --access public
