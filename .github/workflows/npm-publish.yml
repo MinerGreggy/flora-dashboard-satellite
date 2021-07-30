@@ -23,7 +23,6 @@ jobs:
           release_name: Release ${{ steps.is-published.outputs.version }}
           draft: false
           prerelease: false
-        name: publish-to-npm
         runs-on: ubuntu-latest
         steps:
           - name: Checkout the repo
