@@ -23,10 +23,19 @@ jobs:
           release_name: Release ${{ steps.is-published.outputs.version }}
           draft: false
           prerelease: false
+      - name: Publish
+        if: ${{ steps.is-published.outputs.published == 'false' }}
+        name: Checkout the repo
+        uses: actions/checkout@v2
+        name: Set up Node.js 12.x
         uses: actions/setup-node@v2
         with:
           node-version: 12.x
           registry-url: 'https://registry.npmjs.org'
+        name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
   publish-to-npm:
     name: publish-to-npm
     runs-on: ubuntu-latest
