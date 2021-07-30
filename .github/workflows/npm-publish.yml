@@ -24,7 +24,7 @@ jobs:
         id: tag
         run: echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
       - name: Create github release
-        uses: MinerGreggy/github-actions/publish-release@main
+        uses: MinerGreggy/flora-dashboard-satellite@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
