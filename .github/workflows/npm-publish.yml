@@ -23,10 +23,10 @@ jobs:
           release_name: Release ${{ steps.is-published.outputs.version }}
           draft: false
           prerelease: false
+        uses: actions/checkout@v2
   publish-to-npm:
     name: publish-to-npm
     runs-on: ubuntu-latest
-    if: ${{ steps.is-published.outputs.published == 'false' }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
