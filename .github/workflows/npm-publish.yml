@@ -29,8 +29,8 @@ jobs:
     steps:
       - uses: actions/setup-node@master
         with:
-        version: 12
-        registry-url: 'https://registry.npmjs.org'
+          version: 12
+          registry-url: 'https://registry.npmjs.org'
       - uses: shawnbot/npm-publish-action@master
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
