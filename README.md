@@ -2,7 +2,7 @@ Flora-Dashboard-Satellite
 ======
 
 [![Software License](https://img.shields.io/badge/license-GPL--3.0-brightgreen.svg?style=flat-square)](LICENSE)
-[![npm](https://img.shields.io/npm/v/flora-dashboard-satellite.svg?style=flat-square)](https://libraries.io/npm/flora-dashboard-satellite)
+[![npm](https://img.shields.io/npm/v/flora-dashboard-satellite.svg?style=flat-square)](https://registry.npmjs.org/flora-dashboard-satellite)
 
 ## Prerequisites
 
