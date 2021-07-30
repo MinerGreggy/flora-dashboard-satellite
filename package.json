@@ -38,9 +38,5 @@
         "chiadashboard",
         "floradashboard"
     ],
-    "publishConfig":{
-        "access": "public",
-        "registry":"https://libraries.io/npm"
-    },
     "author": "MinerGreggy"
 }
