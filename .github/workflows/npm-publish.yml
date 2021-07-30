@@ -4,39 +4,62 @@ on:
     branches:
       - main # Change this to your default branch
 jobs:
-  release:
+    build:
+    name: Build
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [ 12.x ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: yarn install
+        run: yarn install
+      - name: Package release archive
+        run: yarn run package
+      - name: Save release archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-archive-${{ matrix.os }}
+          path: build/*.zip
+
+  publish-release:
+    name: Publish release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - uses: flood-io/is-published-on-npm@v1
-        id: is-published
-      - name: Release
-        if: ${{ steps.is-published.outputs.published == 'false' }}
-        uses: actions/create-release@v1
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+          registry-url: 'https://registry.npmjs.org'
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+      - name: Fetch release archives
+        uses: actions/download-artifact@v2
+      - name: Get the tag name
+        id: tag
+        run: echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\//}
+      - name: Create github release
+        uses: MinerGreggy/github-actions/publish-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.is-published.outputs.version }}
-          release_name: Release ${{ steps.is-published.outputs.version }}
-          draft: false
-          prerelease: false
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-     - name: Checkout repository
-       uses: actions/checkout@v2
-     - name: Publish if version has been updated
-       uses: pascalgn/npm-publish-action@1.3.8
-       with: # All of theses inputs are optionals
-        tag_name: "v%s"
-        tag_message: "v%s"
-        create_tag: "true"
-        commit_pattern: "^Release (\\S+)"
-        workspace: "."
-        publish_command: "npm"
-        publish_args: "--non-interactive"
-       env: # More info about the environment variables in the README
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # You need to set this in your repo settings
-
+          args: --name Flora-Dashboard-Satellite
+      - uses: AButler/upload-release-assets@v2.0
+        with:
+          files: 'release-archive-*/*.zip'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          release-tag: ${{ steps.tag.outputs.TAG }}
