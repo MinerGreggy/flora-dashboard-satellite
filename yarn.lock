@@ -398,10 +398,10 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-flora-api@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/flora-api/-/flora-api-2.2.3.tgz#a23e2831fa626df3ead6b835de1cc7a26799849e"
-  integrity sha512-PRMfb4IIE0tY3t4ZAOkynC+tco/ZumGoKYTW2nEy0CjbSTVRwC6/EwREHq3wQE/R+xw4obfrMU7EftScKhCB4A==
+flora-api@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/flora-api/-/flora-api-2.2.4.tgz#83223953c2e51dd1a6760838719c6b6b136df2a7"
+  integrity sha512-ichFjAj40yTXVp6t8Lbg0UmTR9baU3AyuR68vd7As3TonWLjz+hBMzEHl5DRZ6tmJpY0tjE6vqvgqs3WuDMcrg==
   dependencies:
     json-bigint "^1.0.0"
     ws "^7.5.0"
